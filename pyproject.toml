@@ -10,7 +10,10 @@ build-backend = "hatchling.build"
 requires = ["hatchling"]
 
 [project.entry-points."tiled.special_client"]
-NSLS2Data = "lambda_tiled_plugins.clients.nsls2:NSLS2Data"
+LambdaExperiment = "lambda_tiled_plugins.clients.lambda:LambdaExperiment"
+MXLambdaExperiment = "lambda_tiled_plugins.clients.lambda:MXLambdaExperiment"
+SAXSLambdaExperiment = "lambda_tiled_plugins.clients.lambda:SAXSLambdaExperiment"
+CryoEMLambdaExperiment = "lambda_tiled_plugins.clients.lambda:CryoEMLambdaExperiment"
 
 [tool.pixi.workspace]
 channels = ["conda-forge"]

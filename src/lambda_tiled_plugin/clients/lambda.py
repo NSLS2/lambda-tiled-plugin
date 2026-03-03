@@ -8,3 +8,13 @@ class LambdaExperiment(Container):
             f"<LambdaExperiment "
             f"uid={self.metadata['start']['uid']}"
         )
+
+
+class MXLambdaExperiment(LambdaExperiment):
+    ...
+
+class SAXSLambdaExperiment(LambdaExperiment):
+    ...
+
+class CryoEMLambdaExperiment(LambdaExperiment):
+    ...
