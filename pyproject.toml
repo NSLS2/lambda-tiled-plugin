@@ -10,6 +10,7 @@ build-backend = "hatchling.build"
 requires = ["hatchling"]
 
 [project.entry-points."tiled.special_client"]
+CatalogOfLambdaExperiments = "lambda_tiled_plugin.clients.lambda:CatalogOfLambdaExperiments"
 LambdaExperiment = "lambda_tiled_plugin.clients.lambda:LambdaExperiment"
 MXLambdaExperiment = "lambda_tiled_plugin.clients.lambda:MXLambdaExperiment"
 SAXSLambdaExperiment = "lambda_tiled_plugin.clients.lambda:SAXSLambdaExperiment"
