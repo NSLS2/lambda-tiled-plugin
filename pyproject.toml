@@ -1,6 +1,6 @@
 [project]
 authors = [{name = "Shekar V", email = "vshekar1@bnl.gov"}]
-dependencies = ["tiled[client]>=0.2.0"]
+dependencies = ["tiled[client]>=0.2.0", "bluesky-tiled-plugins>=2.0.2,<3"]
 name = "lambda-tiled-plugin"
 requires-python = ">= 3.11"
 version = "0.1.0"
@@ -10,10 +10,10 @@ build-backend = "hatchling.build"
 requires = ["hatchling"]
 
 [project.entry-points."tiled.special_client"]
-LambdaExperiment = "lambda_tiled_plugins.clients.lambda:LambdaExperiment"
-MXLambdaExperiment = "lambda_tiled_plugins.clients.lambda:MXLambdaExperiment"
-SAXSLambdaExperiment = "lambda_tiled_plugins.clients.lambda:SAXSLambdaExperiment"
-CryoEMLambdaExperiment = "lambda_tiled_plugins.clients.lambda:CryoEMLambdaExperiment"
+LambdaExperiment = "lambda_tiled_plugin.clients.lambda:LambdaExperiment"
+MXLambdaExperiment = "lambda_tiled_plugin.clients.lambda:MXLambdaExperiment"
+SAXSLambdaExperiment = "lambda_tiled_plugin.clients.lambda:SAXSLambdaExperiment"
+CryoEMLambdaExperiment = "lambda_tiled_plugin.clients.lambda:CryoEMLambdaExperiment"
 
 [tool.pixi.workspace]
 channels = ["conda-forge"]
@@ -26,3 +26,4 @@ lambda_tiled_plugin = { path = ".", editable = true }
 
 [tool.pixi.dependencies]
 fastapi = ">=0.135.1,<0.136"
+ipython = ">=9.10.0,<10"
