@@ -16,17 +16,18 @@ class LambdaExperiment(BlueskyRun):
 class MXLambdaExperiment(LambdaExperiment):
     @property
     def metadata(self) -> DictView[str, JSON_ITEM]:
+        md = self.item["attributes"]["metadata"]
         lambda_md = {
-            "experiment_id": self.item["attributes"]["metadata"]["start"]["uid"],
-            "pid": self.item["attributes"]["metadata"]["start"]["scan_id"],
-            "facility": self.item["attributes"]["metadata"]["start"]["lambda"]["facility"],
-            "is_public": self.item["attributes"]["metadata"]["start"]["lambda"]["is_public"],
-            "protein_name": self.item["attributes"]["metadata"]["start"]["lambda"]["protein_name"],
-            "technique": self.item["attributes"]["metadata"]["start"]["lambda"]["technique"],
-            "instrument": self.item["attributes"]["metadata"]["start"]["lambda"]["instrument"],
-            "creation_date": self.item["attributes"]["metadata"]["start"]["time"],
-            "PI": self.item["attributes"]["metadata"]["start"]["lambda"]["pi"],
-            "creation_date_query": self.item["attributes"]["metadata"]["start"]["time"]
+            "experiment_id": md["start"]["uid"],
+            "pid": md["start"]["scan_id"],
+            "facility": md["start"]["lambda"]["facility"],
+            "is_public": md["start"]["lambda"]["is_public"],
+            "protein_name": md["start"]["lambda"]["protein_name"],
+            "technique": md["start"]["lambda"]["technique"],
+            "instrument": md["start"]["lambda"]["instrument"],
+            "creation_date": md["start"]["time"],
+            "PI": md["start"]["lambda"]["pi"],
+            "creation_date_query": md["start"]["time"]
         }
         return DictView(lambda_md)
 
