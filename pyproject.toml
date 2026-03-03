@@ -1,0 +1,25 @@
+[project]
+authors = [{name = "Shekar V", email = "vshekar1@bnl.gov"}]
+dependencies = ["tiled[client]>=0.2.0"]
+name = "lambda-tiled-plugin"
+requires-python = ">= 3.11"
+version = "0.1.0"
+
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
+
+[project.entry-points."tiled.special_client"]
+NSLS2Data = "lambda_tiled_plugins.clients.nsls2:NSLS2Data"
+
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+platforms = ["osx-arm64"]
+
+[tool.pixi.pypi-dependencies]
+lambda_tiled_plugin = { path = ".", editable = true }
+
+[tool.pixi.tasks]
+
+[tool.pixi.dependencies]
+fastapi = ">=0.135.1,<0.136"
