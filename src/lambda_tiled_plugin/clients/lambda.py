@@ -4,7 +4,16 @@ from datetime import datetime
 from tiled.client.base import JSON_ITEM
 from tiled.utils import DictView
 
+def get_in(d, keys, default=None) -> JSON_ITEM:
+    cur = d
+    for k in keys:
+        if not isinstance(cur, dict) or k not in cur:
+            return default
+        cur = cur[k]
+    return cur
+
 class LambdaExperiment(BlueskyRun):
+    _key_map = {}
     def __repr__(self):
         dt = datetime.fromtimestamp(self.item["attributes"]["metadata"]["start"]["time"])
         return (
@@ -14,20 +23,24 @@ class LambdaExperiment(BlueskyRun):
 
 
 class MXLambdaExperiment(LambdaExperiment):
+    _key_map = {
+        "experiment_id": ["uid"],
+        "pid": ["scan_id"],
+        "facility": ["lambda", "facility"],
+        "is_public": ["lambda", "is_public"],
+        "protein_name": ["lambda", "protein_name"],
+        "technique": ["lambda", "technique"],
+        "instrument": ["lambda", "instrument"],
+        "creation_date": ["time"],
+        "PI": ["lambda.pi"],
+        "creation_date_query": ["time"]
+    }
+    
     @property
     def metadata(self) -> DictView[str, JSON_ITEM]:
-        md = self.item["attributes"]["metadata"]
+        md = self.item["attributes"]["metadata"]["start"]
         lambda_md = {
-            "experiment_id": md["start"]["uid"],
-            "pid": md["start"]["scan_id"],
-            "facility": md["start"]["lambda"]["facility"],
-            "is_public": md["start"]["lambda"]["is_public"],
-            "protein_name": md["start"]["lambda"]["protein_name"],
-            "technique": md["start"]["lambda"]["technique"],
-            "instrument": md["start"]["lambda"]["instrument"],
-            "creation_date": md["start"]["time"],
-            "PI": md["start"]["lambda"]["pi"],
-            "creation_date_query": md["start"]["time"]
+            k: get_in(md, self._key_map[k]) for k in self._key_map.keys()
         }
         return DictView(lambda_md)
 
